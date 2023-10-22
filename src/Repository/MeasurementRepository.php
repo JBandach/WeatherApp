@@ -27,13 +27,12 @@ class MeasurementRepository extends ServiceEntityRepository
     $qb->where('m.location = :location')
         ->setParameter('location', $location)
         ->andWhere('m.date > :now')
-        ->setParameter('now', date('d-m-Y'));
+        ->setParameter('now', date('Y-m-d'));
 
     $query = $qb->getQuery();
     $result = $query->getResult();
     return $result;
 }
-
 
 //    /**
 //     * @return Measurement[] Returns an array of Measurement objects
