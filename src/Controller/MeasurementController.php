@@ -26,7 +26,9 @@ class MeasurementController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $measurement = new Measurement();
-        $form = $this->createForm(MeasurementType::class, $measurement);
+        $form = $this->createForm(MeasurementType::class, $measurement, [
+            'validation_groups' => 'edit',
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
