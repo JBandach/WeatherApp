@@ -20,10 +20,7 @@ class MeasurementType extends AbstractType
                 'html5' => true,
             ])
             ->add('celsius', NumberType::class, [
-                'attr' => [
-                    'min' => -20,
-                    'max' => 40,
-                ],
+                
                 'html5' => true,
             ])
             ->add('location', EntityType::class, [

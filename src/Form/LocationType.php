@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class LocationType extends AbstractType
 {
@@ -29,8 +30,14 @@ class LocationType extends AbstractType
                     'United States' => 'US',
                 ],
             ])
-            ->add('latitude')
-            ->add('longitude')
+            ->add('latitude', NumberType::class, [
+                'scale' => 7,
+                'html5' => true,
+            ])
+            ->add('longitude', NumberType::class, [
+                'scale' => 7,
+                'html5' => true,
+            ])
         ;
     }
 
