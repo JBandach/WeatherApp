@@ -31,8 +31,6 @@ class Location
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Measurement::class)]
     private Collection $measurements;
 
-    
-
     public function __construct()
     {
         $this->measurements = new ArrayCollection();
@@ -120,6 +118,4 @@ class Location
 
         return $this;
     }
-
-    
 }
