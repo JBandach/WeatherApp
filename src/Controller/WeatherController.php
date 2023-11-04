@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Measurement;
+use App\Service\WeatherUtil;
 use App\Entity\Location;
 use App\Repository\LocationRepository;
 use App\Repository\MeasurementRepository;
@@ -13,11 +14,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class WeatherController extends AbstractController
 {
     #[Route('/weather/{country}/{city}', name: 'app_weather', requirements: ['id' => '\d+', 'country' => '^[A-Z]{2}', 'city' => '^[a-zA-Z]+$'])]
-public function city(string $country, string $city, MeasurementRepository $measurementRepository, LocationRepository $locationRepository): Response
+public function city(
+    string $country, string $city, WeatherUtil $util, LocationRepository $locationRepository): Response
 {
     $location = $locationRepository->findLocationByCodeAndCity($country, $city);
 
-    $measurements = $measurementRepository->findByLocation($location);
+    $measurements = $util->getWeatherForLocation($location);
     
     return $this->render('weather/city.html.twig', [
         'location' => $location,
